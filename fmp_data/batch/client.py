@@ -6,6 +6,7 @@ from typing import Any, TypeVar
 from pydantic import BaseModel
 from pydantic import ValidationError as PydanticValidationError
 
+from fmp_data.alternative.models import CommodityQuote, CryptoQuote, ForexQuote
 from fmp_data.base import EndpointGroup
 from fmp_data.batch._csv_utils import parse_csv_models, parse_csv_rows
 from fmp_data.batch.endpoints import (
@@ -29,6 +30,13 @@ from fmp_data.batch.endpoints import (
     EARNINGS_SURPRISES_BULK,
     EOD_BULK,
     ETF_HOLDER_BULK,
+    FULL_COMMODITIES_QUOTES,
+    FULL_CRYPTO_QUOTES,
+    FULL_ETF_QUOTES,
+    FULL_EXCHANGE_QUOTES,
+    FULL_FOREX_QUOTES,
+    FULL_INDEX_QUOTES,
+    FULL_MUTUALFUND_QUOTES,
     INCOME_STATEMENT_BULK,
     INCOME_STATEMENT_GROWTH_BULK,
     KEY_METRICS_TTM_BULK,
@@ -56,6 +64,7 @@ from fmp_data.company.models import (
     UpgradeDowngradeConsensus,
 )
 from fmp_data.exceptions import InvalidResponseTypeError
+from fmp_data.index.models import IndexQuote
 from fmp_data.fundamental.models import (
     DCF,
     BalanceSheet,
@@ -363,3 +372,31 @@ class BatchClient(EndpointGroup):
         date_param = target_date.strftime("%Y-%m-%d")
         raw = self._request_csv(EOD_BULK, date=date_param)
         return parse_csv_models(raw, EODBulk)
+
+    def get_full_exchange_quotes(self, exchange: str) -> list[BatchQuote]:
+        """Get full quotes for all stocks on an exchange"""
+        return self.client.request(FULL_EXCHANGE_QUOTES, exchange=exchange)
+
+    def get_full_etf_quotes(self) -> list[BatchQuote]:
+        """Get full quotes for all ETFs"""
+        return self.client.request(FULL_ETF_QUOTES)
+
+    def get_full_mutualfund_quotes(self) -> list[BatchQuote]:
+        """Get full quotes for all mutual funds"""
+        return self.client.request(FULL_MUTUALFUND_QUOTES)
+
+    def get_full_crypto_quotes(self) -> list[CryptoQuote]:
+        """Get full quotes for all cryptocurrencies"""
+        return self.client.request(FULL_CRYPTO_QUOTES)
+
+    def get_full_commodities_quotes(self) -> list[CommodityQuote]:
+        """Get full quotes for all commodities"""
+        return self.client.request(FULL_COMMODITIES_QUOTES)
+
+    def get_full_forex_quotes(self) -> list[ForexQuote]:
+        """Get full quotes for all forex pairs"""
+        return self.client.request(FULL_FOREX_QUOTES)
+
+    def get_full_index_quotes(self) -> list[IndexQuote]:
+        """Get full quotes for all indexes"""
+        return self.client.request(FULL_INDEX_QUOTES)

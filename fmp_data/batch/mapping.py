@@ -22,6 +22,13 @@ from fmp_data.batch.endpoints import (
     EARNINGS_SURPRISES_BULK,
     EOD_BULK,
     ETF_HOLDER_BULK,
+    FULL_COMMODITIES_QUOTES,
+    FULL_CRYPTO_QUOTES,
+    FULL_ETF_QUOTES,
+    FULL_EXCHANGE_QUOTES,
+    FULL_FOREX_QUOTES,
+    FULL_INDEX_QUOTES,
+    FULL_MUTUALFUND_QUOTES,
     INCOME_STATEMENT_BULK,
     INCOME_STATEMENT_GROWTH_BULK,
     KEY_METRICS_TTM_BULK,
@@ -67,6 +74,13 @@ BATCH_ENDPOINT_MAP = {
     "get_cash_flow_bulk": CASH_FLOW_STATEMENT_BULK,
     "get_cash_flow_growth_bulk": CASH_FLOW_STATEMENT_GROWTH_BULK,
     "get_eod_bulk": EOD_BULK,
+    "get_full_exchange_quotes": FULL_EXCHANGE_QUOTES,
+    "get_full_etf_quotes": FULL_ETF_QUOTES,
+    "get_full_mutualfund_quotes": FULL_MUTUALFUND_QUOTES,
+    "get_full_crypto_quotes": FULL_CRYPTO_QUOTES,
+    "get_full_commodities_quotes": FULL_COMMODITIES_QUOTES,
+    "get_full_forex_quotes": FULL_FOREX_QUOTES,
+    "get_full_index_quotes": FULL_INDEX_QUOTES,
 }
 
 # Complete semantic definitions for all endpoints
@@ -809,5 +823,181 @@ BATCH_ENDPOINTS_SEMANTICS = {
         parameter_hints={},
         response_hints={},
         use_cases=["Market data analysis", "Financial research"],
+    ),
+    "full_exchange_quotes": EndpointSemantics(
+        client_name="batch",
+        method_name="get_full_exchange_quotes",
+        natural_description=(
+            "Get full quotes for all stocks on an exchange. "
+            "Returns comprehensive quote data including price, volume, and "
+            "market statistics for every stock on the specified exchange."
+        ),
+        example_queries=[
+            "Get full quotes for NYSE stocks",
+            "Full exchange quote data for NASDAQ",
+            "Complete quotes for all stocks on exchange",
+            "Full market data for exchange",
+        ],
+        related_terms=[
+            "full quotes",
+            "exchange quotes",
+            "complete quotes",
+            "NYSE",
+            "NASDAQ",
+        ],
+        category=SemanticCategory.MARKET_DATA,
+        parameter_hints={},
+        response_hints={},
+        use_cases=["Market data analysis", "Exchange-wide screening"],
+    ),
+    "full_etf_quotes": EndpointSemantics(
+        client_name="batch",
+        method_name="get_full_etf_quotes",
+        natural_description=(
+            "Get full quotes for all ETFs. "
+            "Returns comprehensive quote data for the entire ETF universe."
+        ),
+        example_queries=[
+            "Get full ETF quotes",
+            "All ETF full quote data",
+            "Complete ETF market data",
+            "Full quotes for every ETF",
+        ],
+        related_terms=[
+            "full ETF quotes",
+            "ETF universe",
+            "complete ETF data",
+            "exchange-traded funds",
+        ],
+        category=SemanticCategory.MARKET_DATA,
+        parameter_hints={},
+        response_hints={},
+        use_cases=["ETF screening", "Market data analysis"],
+    ),
+    "full_mutualfund_quotes": EndpointSemantics(
+        client_name="batch",
+        method_name="get_full_mutualfund_quotes",
+        natural_description=(
+            "Get full quotes for all mutual funds. "
+            "Returns comprehensive quote data for the entire mutual fund universe."
+        ),
+        example_queries=[
+            "Get full mutual fund quotes",
+            "All mutual fund full quote data",
+            "Complete mutual fund market data",
+            "Full quotes for every mutual fund",
+        ],
+        related_terms=[
+            "full mutual fund quotes",
+            "fund universe",
+            "complete fund data",
+            "NAV",
+        ],
+        category=SemanticCategory.MARKET_DATA,
+        parameter_hints={},
+        response_hints={},
+        use_cases=["Fund screening", "Market data analysis"],
+    ),
+    "full_crypto_quotes": EndpointSemantics(
+        client_name="batch",
+        method_name="get_full_crypto_quotes",
+        natural_description=(
+            "Get full quotes for all cryptocurrencies. "
+            "Returns comprehensive quote data for the entire crypto market."
+        ),
+        example_queries=[
+            "Get full crypto quotes",
+            "All cryptocurrency full quote data",
+            "Complete crypto market data",
+            "Full quotes for every cryptocurrency",
+        ],
+        related_terms=[
+            "full crypto quotes",
+            "cryptocurrency",
+            "Bitcoin",
+            "Ethereum",
+            "digital assets",
+        ],
+        category=SemanticCategory.MARKET_DATA,
+        parameter_hints={},
+        response_hints={},
+        use_cases=["Crypto market analysis", "Digital asset screening"],
+    ),
+    "full_commodities_quotes": EndpointSemantics(
+        client_name="batch",
+        method_name="get_full_commodities_quotes",
+        natural_description=(
+            "Get full quotes for all commodities. "
+            "Returns comprehensive quote data for gold, silver, oil, "
+            "and other commodity futures."
+        ),
+        example_queries=[
+            "Get full commodity quotes",
+            "All commodity full quote data",
+            "Complete commodity market data",
+            "Full quotes for every commodity",
+        ],
+        related_terms=[
+            "full commodity quotes",
+            "commodities",
+            "gold",
+            "oil",
+            "futures",
+            "metals",
+        ],
+        category=SemanticCategory.MARKET_DATA,
+        parameter_hints={},
+        response_hints={},
+        use_cases=["Commodity market analysis", "Futures screening"],
+    ),
+    "full_forex_quotes": EndpointSemantics(
+        client_name="batch",
+        method_name="get_full_forex_quotes",
+        natural_description=(
+            "Get full quotes for all forex pairs. "
+            "Returns comprehensive quote data for all currency pairs."
+        ),
+        example_queries=[
+            "Get full forex quotes",
+            "All forex full quote data",
+            "Complete currency pair market data",
+            "Full quotes for every forex pair",
+        ],
+        related_terms=[
+            "full forex quotes",
+            "foreign exchange",
+            "currency pairs",
+            "FX rates",
+        ],
+        category=SemanticCategory.MARKET_DATA,
+        parameter_hints={},
+        response_hints={},
+        use_cases=["Forex market analysis", "Currency screening"],
+    ),
+    "full_index_quotes": EndpointSemantics(
+        client_name="batch",
+        method_name="get_full_index_quotes",
+        natural_description=(
+            "Get full quotes for all indexes. "
+            "Returns comprehensive quote data for S&P 500, Dow Jones, "
+            "NASDAQ, and other market indexes."
+        ),
+        example_queries=[
+            "Get full index quotes",
+            "All index full quote data",
+            "Complete market index data",
+            "Full quotes for every index",
+        ],
+        related_terms=[
+            "full index quotes",
+            "market indexes",
+            "S&P 500",
+            "Dow Jones",
+            "NASDAQ",
+        ],
+        category=SemanticCategory.MARKET_DATA,
+        parameter_hints={},
+        response_hints={},
+        use_cases=["Index tracking", "Market benchmark analysis"],
     ),
 }

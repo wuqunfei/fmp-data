@@ -1,4 +1,5 @@
 # fmp_data/batch/endpoints.py
+from fmp_data.alternative.models import CommodityQuote, CryptoQuote, ForexQuote
 from fmp_data.batch.models import (
     AftermarketQuote,
     AftermarketTrade,
@@ -6,6 +7,7 @@ from fmp_data.batch.models import (
     BatchQuote,
     BatchQuoteShort,
 )
+from fmp_data.index.models import IndexQuote
 from fmp_data.models import (
     APIVersion,
     Endpoint,
@@ -666,4 +668,131 @@ EOD_BULK: Endpoint = Endpoint(
     ],
     optional_params=[],
     response_model=bytes,
+)
+
+FULL_EXCHANGE_QUOTES: Endpoint = Endpoint(
+    name="full_exchange_quotes",
+    path="full-exchange-quotes",
+    version=APIVersion.STABLE,
+    url_type=URLType.API,
+    method=HTTPMethod.GET,
+    description="Get full quotes for all stocks on an exchange",
+    mandatory_params=[
+        EndpointParam(
+            name="exchange",
+            location=ParamLocation.QUERY,
+            param_type=ParamType.STRING,
+            required=True,
+            description="Exchange code (e.g., NYSE, NASDAQ)",
+        )
+    ],
+    optional_params=[],
+    response_model=BatchQuote,
+    example_queries=[
+        "Get full quotes for NYSE stocks",
+        "Full exchange quote data",
+        "All stock quotes on NASDAQ",
+    ],
+)
+
+FULL_ETF_QUOTES: Endpoint = Endpoint(
+    name="full_etf_quotes",
+    path="full-etf-quotes",
+    version=APIVersion.STABLE,
+    url_type=URLType.API,
+    method=HTTPMethod.GET,
+    description="Get full quotes for all ETFs",
+    mandatory_params=[],
+    optional_params=[],
+    response_model=BatchQuote,
+    example_queries=[
+        "Get full ETF quotes",
+        "All ETF full quote data",
+        "Complete ETF market data",
+    ],
+)
+
+FULL_MUTUALFUND_QUOTES: Endpoint = Endpoint(
+    name="full_mutualfund_quotes",
+    path="full-mutualfund-quotes",
+    version=APIVersion.STABLE,
+    url_type=URLType.API,
+    method=HTTPMethod.GET,
+    description="Get full quotes for all mutual funds",
+    mandatory_params=[],
+    optional_params=[],
+    response_model=BatchQuote,
+    example_queries=[
+        "Get full mutual fund quotes",
+        "All mutual fund full quote data",
+        "Complete mutual fund market data",
+    ],
+)
+
+FULL_CRYPTO_QUOTES: Endpoint = Endpoint(
+    name="full_crypto_quotes",
+    path="full-cryptocurrency-quotes",
+    version=APIVersion.STABLE,
+    url_type=URLType.API,
+    method=HTTPMethod.GET,
+    description="Get full quotes for all cryptocurrencies",
+    mandatory_params=[],
+    optional_params=[],
+    response_model=CryptoQuote,
+    example_queries=[
+        "Get full crypto quotes",
+        "All cryptocurrency full quote data",
+        "Complete crypto market data",
+    ],
+)
+
+FULL_COMMODITIES_QUOTES: Endpoint = Endpoint(
+    name="full_commodities_quotes",
+    path="full-commodities-quotes",
+    version=APIVersion.STABLE,
+    url_type=URLType.API,
+    method=HTTPMethod.GET,
+    description="Get full quotes for all commodities",
+    mandatory_params=[],
+    optional_params=[],
+    response_model=CommodityQuote,
+    example_queries=[
+        "Get full commodity quotes",
+        "All commodity full quote data",
+        "Complete commodity market data",
+    ],
+)
+
+FULL_FOREX_QUOTES: Endpoint = Endpoint(
+    name="full_forex_quotes",
+    path="full-forex-quotes",
+    version=APIVersion.STABLE,
+    url_type=URLType.API,
+    method=HTTPMethod.GET,
+    description="Get full quotes for all forex pairs",
+    mandatory_params=[],
+    optional_params=[],
+    response_model=ForexQuote,
+    example_queries=[
+        "Get full forex quotes",
+        "All forex full quote data",
+        "Complete currency pair market data",
+    ],
+)
+
+FULL_INDEX_QUOTES: Endpoint = Endpoint(
+    name="full_index_quotes",
+    path="full-index-quotes",
+    version=APIVersion.STABLE,
+    url_type=URLType.API,
+    method=HTTPMethod.GET,
+    description="Get full quotes for all indexes",
+    mandatory_params=[],
+    optional_params=[],
+    response_model=IndexQuote,
+    example_queries=[
+        "Get full index quotes",
+        "All index full quote data",
+        "Complete market index data",
+    ],
 )
