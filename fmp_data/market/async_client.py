@@ -16,6 +16,7 @@ from fmp_data.market.endpoints import (
     CIK_LIST,
     CIK_SEARCH,
     COMPANY_SCREENER,
+    COMPANY_SYMBOLS_LIST,
     CUSIP_SEARCH,
     ETF_LIST,
     FINANCIAL_STATEMENT_SYMBOL_LIST,
@@ -29,6 +30,7 @@ from fmp_data.market.endpoints import (
     INDUSTRY_PERFORMANCE_SNAPSHOT,
     IPO_DISCLOSURE,
     IPO_PROSPECTUS,
+    IS_MARKET_OPEN,
     ISIN_SEARCH,
     LOSERS,
     MARKET_HOURS,
@@ -40,10 +42,8 @@ from fmp_data.market.endpoints import (
     SECTOR_PE_SNAPSHOT,
     SECTOR_PERFORMANCE,
     STOCK_LIST,
-    TRADABLE_SEARCH,
-    IS_MARKET_OPEN,
     SYMBOL_CHANGES_LIST,
-    COMPANY_SYMBOLS_LIST,
+    TRADABLE_SEARCH,
 )
 from fmp_data.market.models import (
     AvailableIndex,

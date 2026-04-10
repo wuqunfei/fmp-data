@@ -124,9 +124,7 @@ class IndexHistoricalPrice(BaseModel):
     change_percent: float | None = Field(
         None, alias="changePercent", description="Price change percentage"
     )
-    vwap: float | None = Field(
-        None, description="Volume weighted average price"
-    )
+    vwap: float | None = Field(None, description="Volume weighted average price")
     label: str | None = Field(None, description="Date label")
     change_over_time: float | None = Field(
         None, alias="changeOverTime", description="Change over time"

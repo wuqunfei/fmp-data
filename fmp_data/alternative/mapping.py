@@ -652,9 +652,7 @@ ALTERNATIVE_ENDPOINTS_SEMANTICS = {
     "forex_historical_light": EndpointSemantics(
         client_name="alternative",
         method_name="get_forex_historical_light",
-        natural_description=(
-            "Get lightweight historical price data for a forex pair"
-        ),
+        natural_description=("Get lightweight historical price data for a forex pair"),
         example_queries=[
             "Get light forex historical prices",
             "Lightweight forex price history",
@@ -926,9 +924,7 @@ ALTERNATIVE_ENDPOINTS_SEMANTICS = {
     "commodity_historical_light": EndpointSemantics(
         client_name="alternative",
         method_name="get_commodity_historical_light",
-        natural_description=(
-            "Get lightweight historical price data for a commodity"
-        ),
+        natural_description=("Get lightweight historical price data for a commodity"),
         example_queries=[
             "Get light commodity historical prices",
             "Lightweight commodity price history",

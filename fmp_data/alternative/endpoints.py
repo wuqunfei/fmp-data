@@ -33,15 +33,15 @@ from fmp_data.alternative.schema import (
     CryptoIntradayArgs,
     CryptoListArgs,
     CryptoQuoteArgs,
-    CryptoQuoteShortArgs,
     CryptoQuotesArgs,
+    CryptoQuoteShortArgs,
     ForexHistoricalArgs,
     ForexHistoricalLightArgs,
     ForexIntradayArgs,
     ForexListArgs,
     ForexQuoteArgs,
-    ForexQuoteShortArgs,
     ForexQuotesArgs,
+    ForexQuoteShortArgs,
 )
 from fmp_data.models import (
     APIVersion,

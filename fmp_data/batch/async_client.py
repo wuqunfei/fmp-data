@@ -66,7 +66,6 @@ from fmp_data.company.models import (
     UpgradeDowngradeConsensus,
 )
 from fmp_data.exceptions import InvalidResponseTypeError
-from fmp_data.index.models import IndexQuote
 from fmp_data.fundamental.models import (
     DCF,
     BalanceSheet,
@@ -78,6 +77,7 @@ from fmp_data.fundamental.models import (
     IncomeStatement,
     KeyMetricsTTM,
 )
+from fmp_data.index.models import IndexQuote
 from fmp_data.investment.models import ETFHolding
 from fmp_data.models import Endpoint
 
@@ -414,9 +414,7 @@ class AsyncBatchClient(AsyncEndpointGroup):
 
     async def get_full_exchange_quotes(self, exchange: str) -> list[BatchQuote]:
         """Get full quotes for all stocks on an exchange"""
-        return await self.client.request_async(
-            FULL_EXCHANGE_QUOTES, exchange=exchange
-        )
+        return await self.client.request_async(FULL_EXCHANGE_QUOTES, exchange=exchange)
 
     async def get_full_etf_quotes(self) -> list[BatchQuote]:
         """Get full quotes for all ETFs"""

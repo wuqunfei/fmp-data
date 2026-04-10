@@ -64,7 +64,6 @@ from fmp_data.company.models import (
     UpgradeDowngradeConsensus,
 )
 from fmp_data.exceptions import InvalidResponseTypeError
-from fmp_data.index.models import IndexQuote
 from fmp_data.fundamental.models import (
     DCF,
     BalanceSheet,
@@ -76,6 +75,7 @@ from fmp_data.fundamental.models import (
     IncomeStatement,
     KeyMetricsTTM,
 )
+from fmp_data.index.models import IndexQuote
 from fmp_data.investment.models import ETFHolding
 from fmp_data.models import Endpoint
 

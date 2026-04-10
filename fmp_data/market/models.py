@@ -516,9 +516,7 @@ class SymbolChangeItem(BaseModel):
     old_symbol: str | None = Field(
         None, alias="oldSymbol", description="Previous symbol"
     )
-    new_symbol: str | None = Field(
-        None, alias="newSymbol", description="New symbol"
-    )
+    new_symbol: str | None = Field(None, alias="newSymbol", description="New symbol")
 
 
 class CompanySymbolItem(BaseModel):
