@@ -127,3 +127,59 @@ class TestBatchClientEndpoints(BaseTestCase):
             assert isinstance(results, list)
             if results:
                 assert isinstance(results[0], FinancialRatiosTTM)
+
+    def test_get_full_exchange_quotes(self, fmp_client: FMPDataClient, vcr_instance):
+        """Test getting full quotes for all stocks on an exchange"""
+        with vcr_instance.use_cassette("batch/full_exchange_quotes.yaml"):
+            results = self._handle_rate_limit(
+                fmp_client.batch.get_full_exchange_quotes, "NASDAQ"
+            )
+            assert isinstance(results, list)
+            if results:
+                assert isinstance(results[0], BatchQuote)
+
+    def test_get_full_etf_quotes(self, fmp_client: FMPDataClient, vcr_instance):
+        """Test getting full quotes for all ETFs"""
+        with vcr_instance.use_cassette("batch/full_etf_quotes.yaml"):
+            results = self._handle_rate_limit(fmp_client.batch.get_full_etf_quotes)
+            assert isinstance(results, list)
+            if results:
+                assert isinstance(results[0], BatchQuote)
+
+    def test_get_full_mutualfund_quotes(self, fmp_client: FMPDataClient, vcr_instance):
+        """Test getting full quotes for all mutual funds"""
+        with vcr_instance.use_cassette("batch/full_mutualfund_quotes.yaml"):
+            results = self._handle_rate_limit(
+                fmp_client.batch.get_full_mutualfund_quotes
+            )
+            assert isinstance(results, list)
+            if results:
+                assert isinstance(results[0], BatchQuote)
+
+    def test_get_full_crypto_quotes(self, fmp_client: FMPDataClient, vcr_instance):
+        """Test getting full quotes for all cryptocurrencies"""
+        with vcr_instance.use_cassette("batch/full_crypto_quotes.yaml"):
+            results = self._handle_rate_limit(fmp_client.batch.get_full_crypto_quotes)
+            assert isinstance(results, list)
+
+    def test_get_full_commodities_quotes(
+        self, fmp_client: FMPDataClient, vcr_instance
+    ):
+        """Test getting full quotes for all commodities"""
+        with vcr_instance.use_cassette("batch/full_commodities_quotes.yaml"):
+            results = self._handle_rate_limit(
+                fmp_client.batch.get_full_commodities_quotes
+            )
+            assert isinstance(results, list)
+
+    def test_get_full_forex_quotes(self, fmp_client: FMPDataClient, vcr_instance):
+        """Test getting full quotes for all forex pairs"""
+        with vcr_instance.use_cassette("batch/full_forex_quotes.yaml"):
+            results = self._handle_rate_limit(fmp_client.batch.get_full_forex_quotes)
+            assert isinstance(results, list)
+
+    def test_get_full_index_quotes(self, fmp_client: FMPDataClient, vcr_instance):
+        """Test getting full quotes for all indexes"""
+        with vcr_instance.use_cassette("batch/full_index_quotes.yaml"):
+            results = self._handle_rate_limit(fmp_client.batch.get_full_index_quotes)
+            assert isinstance(results, list)

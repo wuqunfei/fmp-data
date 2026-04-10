@@ -2,22 +2,29 @@
 
 from datetime import date
 
+import pytest
 import vcr
 
 from fmp_data import FMPDataClient
 from fmp_data.alternative.models import (
     Commodity,
     CommodityHistoricalPrice,
+    CommodityHistoricalPriceLight,
     CommodityIntradayPrice,
     CommodityQuote,
+    CommodityQuoteShort,
     CryptoHistoricalPrice,
+    CryptoHistoricalPriceLight,
     CryptoIntradayPrice,
     CryptoPair,
     CryptoQuote,
+    CryptoQuoteShort,
     ForexHistoricalPrice,
+    ForexHistoricalPriceLight,
     ForexIntradayPrice,
     ForexPair,
     ForexQuote,
+    ForexQuoteShort,
 )
 
 from .base import BaseTestCase
@@ -220,3 +227,81 @@ class TestAlternativeMarketsClientEndpoints(BaseTestCase):
                     isinstance(price, CommodityIntradayPrice)
                     for price in intraday_prices
                 )
+
+    @pytest.mark.skip(reason="endpoint returns 404 - requires higher API tier")
+    def test_get_crypto_quote_short(
+        self, fmp_client: FMPDataClient, vcr_instance: vcr.VCR
+    ):
+        """Test getting a short cryptocurrency quote"""
+        with vcr_instance.use_cassette("alternative/crypto_quote_short.yaml"):
+            quote = self._handle_rate_limit(
+                fmp_client.alternative.get_crypto_quote_short, "BTCUSD"
+            )
+            assert isinstance(quote, CryptoQuoteShort)
+
+    def test_get_crypto_historical_light(
+        self, fmp_client: FMPDataClient, vcr_instance: vcr.VCR
+    ):
+        """Test getting light cryptocurrency historical prices"""
+        with vcr_instance.use_cassette("alternative/crypto_historical_light.yaml"):
+            results = self._handle_rate_limit(
+                fmp_client.alternative.get_crypto_historical_light,
+                "BTCUSD",
+                start_date=date(2023, 1, 1),
+                end_date=date(2023, 1, 31),
+            )
+            assert isinstance(results, list)
+            if results:
+                assert isinstance(results[0], CryptoHistoricalPriceLight)
+
+    @pytest.mark.skip(reason="endpoint returns 404 - requires higher API tier")
+    def test_get_forex_quote_short(
+        self, fmp_client: FMPDataClient, vcr_instance: vcr.VCR
+    ):
+        """Test getting a short forex quote"""
+        with vcr_instance.use_cassette("alternative/forex_quote_short.yaml"):
+            quote = self._handle_rate_limit(
+                fmp_client.alternative.get_forex_quote_short, "EURUSD"
+            )
+            assert isinstance(quote, ForexQuoteShort)
+
+    def test_get_forex_historical_light(
+        self, fmp_client: FMPDataClient, vcr_instance: vcr.VCR
+    ):
+        """Test getting light forex historical prices"""
+        with vcr_instance.use_cassette("alternative/forex_historical_light.yaml"):
+            results = self._handle_rate_limit(
+                fmp_client.alternative.get_forex_historical_light,
+                "EURUSD",
+                start_date=date(2023, 1, 1),
+                end_date=date(2023, 1, 31),
+            )
+            assert isinstance(results, list)
+            if results:
+                assert isinstance(results[0], ForexHistoricalPriceLight)
+
+    @pytest.mark.skip(reason="endpoint returns 404 - requires higher API tier")
+    def test_get_commodity_quote_short(
+        self, fmp_client: FMPDataClient, vcr_instance: vcr.VCR
+    ):
+        """Test getting a short commodity quote"""
+        with vcr_instance.use_cassette("alternative/commodity_quote_short.yaml"):
+            quote = self._handle_rate_limit(
+                fmp_client.alternative.get_commodity_quote_short, "ZOUSX"
+            )
+            assert isinstance(quote, CommodityQuoteShort)
+
+    def test_get_commodity_historical_light(
+        self, fmp_client: FMPDataClient, vcr_instance: vcr.VCR
+    ):
+        """Test getting light commodity historical prices"""
+        with vcr_instance.use_cassette("alternative/commodity_historical_light.yaml"):
+            results = self._handle_rate_limit(
+                fmp_client.alternative.get_commodity_historical_light,
+                "ZOUSX",
+                start_date=date(2023, 1, 1),
+                end_date=date(2023, 1, 31),
+            )
+            assert isinstance(results, list)
+            if results:
+                assert isinstance(results[0], CommodityHistoricalPriceLight)

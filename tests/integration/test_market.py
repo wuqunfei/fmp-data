@@ -11,6 +11,7 @@ from fmp_data.market.models import (
     CIKListEntry,
     CIKResult,
     CompanySearchResult,
+    CompanySymbolItem,
     CUSIPResult,
     ExchangeSymbol,
     IndustryPerformance,
@@ -21,9 +22,11 @@ from fmp_data.market.models import (
     MarketHoliday,
     MarketHours,
     MarketMover,
+    MarketStatus,
     PrePostMarketQuote,
     SectorPerformance,
     SectorPESnapshot,
+    SymbolChangeItem,
 )
 from fmp_data.models import CompanySymbol, ShareFloat
 from tests.integration.base import BaseTestCase
@@ -544,3 +547,34 @@ class TestMarketClientEndpoints(BaseTestCase):
             assert isinstance(all_float_data, list)
             assert len(all_float_data) > 0
             assert all(isinstance(d, ShareFloat) for d in all_float_data)
+
+    @pytest.mark.skip(reason="endpoint returns 404 - requires higher API tier")
+    def test_get_market_status(self, fmp_client: FMPDataClient, vcr_instance: vcr.VCR):
+        """Test getting market status"""
+        with vcr_instance.use_cassette("market/market_status.yaml"):
+            result = self._handle_rate_limit(fmp_client.market.get_market_status)
+            assert isinstance(result, MarketStatus)
+
+    def test_get_symbol_changes_list(
+        self, fmp_client: FMPDataClient, vcr_instance: vcr.VCR
+    ):
+        """Test getting symbol changes list"""
+        with vcr_instance.use_cassette("market/symbol_changes_list.yaml"):
+            results = self._handle_rate_limit(
+                fmp_client.market.get_symbol_changes_list
+            )
+            assert isinstance(results, list)
+            if results:
+                assert isinstance(results[0], SymbolChangeItem)
+
+    def test_get_company_symbols_list(
+        self, fmp_client: FMPDataClient, vcr_instance: vcr.VCR
+    ):
+        """Test getting company symbols list"""
+        with vcr_instance.use_cassette("market/company_symbols_list.yaml"):
+            results = self._handle_rate_limit(
+                fmp_client.market.get_company_symbols_list
+            )
+            assert isinstance(results, list)
+            if results:
+                assert isinstance(results[0], CompanySymbolItem)
