@@ -4,6 +4,12 @@ from fmp_data.index.client import IndexClient
 from fmp_data.index.models import (
     HistoricalIndexConstituent,
     IndexConstituent,
+    IndexHistoricalPrice,
+    IndexHistoricalPriceLight,
+    IndexInfo,
+    IndexIntradayPrice,
+    IndexQuote,
+    IndexQuoteShort,
 )
 
 __all__ = [
@@ -11,4 +17,10 @@ __all__ = [
     "HistoricalIndexConstituent",
     "IndexClient",
     "IndexConstituent",
+    "IndexHistoricalPrice",
+    "IndexHistoricalPriceLight",
+    "IndexInfo",
+    "IndexIntradayPrice",
+    "IndexQuote",
+    "IndexQuoteShort",
 ]
