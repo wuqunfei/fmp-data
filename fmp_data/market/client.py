@@ -39,12 +39,16 @@ from fmp_data.market.endpoints import (
     SECTOR_PERFORMANCE,
     STOCK_LIST,
     TRADABLE_SEARCH,
+    IS_MARKET_OPEN,
+    SYMBOL_CHANGES_LIST,
+    COMPANY_SYMBOLS_LIST,
 )
 from fmp_data.market.models import (
     AvailableIndex,
     CIKListEntry,
     CIKResult,
     CompanySearchResult,
+    CompanySymbolItem,
     CUSIPResult,
     ExchangeSymbol,
     IndustryPerformance,
@@ -55,9 +59,11 @@ from fmp_data.market.models import (
     MarketHoliday,
     MarketHours,
     MarketMover,
+    MarketStatus,
     PrePostMarketQuote,
     SectorPerformance,
     SectorPESnapshot,
+    SymbolChangeItem,
 )
 from fmp_data.models import CompanySymbol, ShareFloat
 
@@ -428,3 +434,15 @@ class MarketClient(EndpointGroup):
         if to_date:
             params["to"] = to_date.strftime("%Y-%m-%d")
         return self.client.request(IPO_PROSPECTUS, **params)
+
+    def get_market_status(self) -> MarketStatus:
+        """Check if the stock market is currently open"""
+        return self.client.request(IS_MARKET_OPEN)
+
+    def get_symbol_changes_list(self) -> list[SymbolChangeItem]:
+        """Get a list of all symbol changes"""
+        return self.client.request(SYMBOL_CHANGES_LIST)
+
+    def get_company_symbols_list(self) -> list[CompanySymbolItem]:
+        """Get a comprehensive list of all company symbols"""
+        return self.client.request(COMPANY_SYMBOLS_LIST)

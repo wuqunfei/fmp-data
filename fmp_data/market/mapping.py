@@ -7,6 +7,7 @@ from fmp_data.market.endpoints import (
     ALL_SHARES_FLOAT,
     AVAILABLE_INDEXES,
     CIK_SEARCH,
+    COMPANY_SYMBOLS_LIST,
     CUSIP_SEARCH,
     ETF_LIST,
     GAINERS,
@@ -17,6 +18,7 @@ from fmp_data.market.endpoints import (
     HOLIDAYS_BY_EXCHANGE,
     INDUSTRY_PE_SNAPSHOT,
     INDUSTRY_PERFORMANCE_SNAPSHOT,
+    IS_MARKET_OPEN,
     ISIN_SEARCH,
     LOSERS,
     MARKET_HOURS,
@@ -26,6 +28,7 @@ from fmp_data.market.endpoints import (
     SECTOR_PE_SNAPSHOT,
     SECTOR_PERFORMANCE,
     STOCK_LIST,
+    SYMBOL_CHANGES_LIST,
 )
 
 from .hints import COMPANY_SEARCH_HINT, IDENTIFIER_HINT
@@ -54,6 +57,9 @@ MARKET_ENDPOINT_MAP = {
     "search_by_cik": CIK_SEARCH,
     "search_by_cusip": CUSIP_SEARCH,
     "search_by_isin": ISIN_SEARCH,
+    "get_market_status": IS_MARKET_OPEN,
+    "get_symbol_changes_list": SYMBOL_CHANGES_LIST,
+    "get_company_symbols_list": COMPANY_SYMBOLS_LIST,
 }
 # Common parameter hints
 
@@ -1186,6 +1192,124 @@ MARKET_ENDPOINTS_SEMANTICS = {
             "Portfolio screening",
             "Market research",
             "Company discovery",
+        ],
+    ),
+    "is_market_open": EndpointSemantics(
+        client_name="market",
+        method_name="get_market_status",
+        natural_description=(
+            "Check if the stock market is currently open, including status "
+            "for Euronext, forex, and crypto markets"
+        ),
+        example_queries=[
+            "Is the market open?",
+            "Check market status",
+            "Is the stock market open right now?",
+            "Are markets trading today?",
+        ],
+        related_terms=[
+            "market status",
+            "market open",
+            "market closed",
+            "trading status",
+            "market hours",
+        ],
+        category=SemanticCategory.MARKET_DATA,
+        sub_category="Market Status",
+        parameter_hints={},
+        response_hints={
+            "is_the_stock_market_open": ResponseFieldInfo(
+                description="Whether the stock market is currently open",
+                examples=["true", "false"],
+                related_terms=["market open", "trading active"],
+            ),
+        },
+        use_cases=[
+            "Trading readiness check",
+            "Market status monitoring",
+            "Trading automation",
+        ],
+    ),
+    "symbol_changes_list": EndpointSemantics(
+        client_name="market",
+        method_name="get_symbol_changes_list",
+        natural_description=(
+            "Get a list of all symbol changes, showing old and new ticker symbols "
+            "for companies that have changed their trading symbol"
+        ),
+        example_queries=[
+            "List symbol changes",
+            "Show ticker changes",
+            "What symbols have changed recently?",
+            "Get renamed tickers",
+        ],
+        related_terms=[
+            "ticker change",
+            "symbol rename",
+            "symbol update",
+            "ticker update",
+            "company rename",
+        ],
+        category=SemanticCategory.MARKET_DATA,
+        sub_category="Directory",
+        parameter_hints={},
+        response_hints={
+            "old_symbol": ResponseFieldInfo(
+                description="Previous ticker symbol",
+                examples=["FB", "TWTR"],
+                related_terms=["old ticker", "previous symbol"],
+            ),
+            "new_symbol": ResponseFieldInfo(
+                description="New ticker symbol",
+                examples=["META", "X"],
+                related_terms=["new ticker", "current symbol"],
+            ),
+        },
+        use_cases=[
+            "Portfolio reconciliation",
+            "Historical data mapping",
+            "Corporate action tracking",
+        ],
+    ),
+    "company_symbols_list": EndpointSemantics(
+        client_name="market",
+        method_name="get_company_symbols_list",
+        natural_description=(
+            "Get a comprehensive list of all company symbols with basic information "
+            "including price, exchange, and security type"
+        ),
+        example_queries=[
+            "List all company symbols",
+            "Get all tickers",
+            "Show all available company symbols",
+            "Get complete symbol directory",
+        ],
+        related_terms=[
+            "company directory",
+            "symbol list",
+            "ticker directory",
+            "company listings",
+            "security directory",
+        ],
+        category=SemanticCategory.MARKET_DATA,
+        sub_category="Directory",
+        parameter_hints={},
+        response_hints={
+            "symbol": ResponseFieldInfo(
+                description="Company stock symbol",
+                examples=["AAPL", "MSFT", "GOOGL"],
+                related_terms=["ticker", "trading symbol"],
+            ),
+            "name": ResponseFieldInfo(
+                description="Company name",
+                examples=["Apple Inc.", "Microsoft Corporation"],
+                related_terms=["company name", "business name"],
+            ),
+        },
+        use_cases=[
+            "Symbol lookup",
+            "Market directory browsing",
+            "Trading universe construction",
         ],
     ),
 }

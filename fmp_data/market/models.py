@@ -470,3 +470,67 @@ class IPOProspectus(BaseModel):
     )
     form: str | None = Field(None, description="SEC form type")
     url: str | None = Field(None, description="Prospectus URL")
+
+
+class MarketStatus(BaseModel):
+    """Market open/close status"""
+
+    model_config = default_model_config
+
+    stock_exchange_name: str | None = Field(
+        None, alias="stockExchangeName", description="Exchange name"
+    )
+    stock_market_hours: dict | None = Field(
+        None, alias="stockMarketHours", description="Market hours"
+    )
+    stock_market_holidays: list | None = Field(
+        None, alias="stockMarketHolidays", description="Market holidays"
+    )
+    is_the_stock_market_open: bool | None = Field(
+        None, alias="isTheStockMarketOpen", description="Whether the market is open"
+    )
+    is_the_euronext_market_open: bool | None = Field(
+        None,
+        alias="isTheEuronextMarketOpen",
+        description="Whether Euronext is open",
+    )
+    is_the_forex_market_open: bool | None = Field(
+        None,
+        alias="isTheForexMarketOpen",
+        description="Whether forex market is open",
+    )
+    is_the_crypto_market_open: bool | None = Field(
+        None,
+        alias="isTheCryptoMarketOpen",
+        description="Whether crypto market is open",
+    )
+
+
+class SymbolChangeItem(BaseModel):
+    """Symbol change record"""
+
+    model_config = default_model_config
+
+    date: str | None = Field(None, description="Date of change")
+    name: str | None = Field(None, description="Company name")
+    old_symbol: str | None = Field(
+        None, alias="oldSymbol", description="Previous symbol"
+    )
+    new_symbol: str | None = Field(
+        None, alias="newSymbol", description="New symbol"
+    )
+
+
+class CompanySymbolItem(BaseModel):
+    """Company symbol listing"""
+
+    model_config = default_model_config
+
+    symbol: str = Field(description="Stock symbol")
+    name: str | None = Field(None, description="Company name")
+    price: float | None = Field(None, description="Current price")
+    exchange: str | None = Field(None, description="Exchange")
+    exchange_short_name: str | None = Field(
+        None, alias="exchangeShortName", description="Exchange abbreviation"
+    )
+    type: str | None = Field(None, description="Security type")

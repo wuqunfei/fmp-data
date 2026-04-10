@@ -41,12 +41,16 @@ from fmp_data.market.endpoints import (
     SECTOR_PERFORMANCE,
     STOCK_LIST,
     TRADABLE_SEARCH,
+    IS_MARKET_OPEN,
+    SYMBOL_CHANGES_LIST,
+    COMPANY_SYMBOLS_LIST,
 )
 from fmp_data.market.models import (
     AvailableIndex,
     CIKListEntry,
     CIKResult,
     CompanySearchResult,
+    CompanySymbolItem,
     CUSIPResult,
     ExchangeSymbol,
     IndustryPerformance,
@@ -57,9 +61,11 @@ from fmp_data.market.models import (
     MarketHoliday,
     MarketHours,
     MarketMover,
+    MarketStatus,
     PrePostMarketQuote,
     SectorPerformance,
     SectorPESnapshot,
+    SymbolChangeItem,
 )
 from fmp_data.models import CompanySymbol, ShareFloat
 
@@ -436,3 +442,15 @@ class AsyncMarketClient(AsyncEndpointGroup):
         if to_date:
             params["to"] = to_date.strftime("%Y-%m-%d")
         return await self.client.request_async(IPO_PROSPECTUS, **params)
+
+    async def get_market_status(self) -> MarketStatus:
+        """Check if the stock market is currently open"""
+        return await self.client.request_async(IS_MARKET_OPEN)
+
+    async def get_symbol_changes_list(self) -> list[SymbolChangeItem]:
+        """Get a list of all symbol changes"""
+        return await self.client.request_async(SYMBOL_CHANGES_LIST)
+
+    async def get_company_symbols_list(self) -> list[CompanySymbolItem]:
+        """Get a comprehensive list of all company symbols"""
+        return await self.client.request_async(COMPANY_SYMBOLS_LIST)

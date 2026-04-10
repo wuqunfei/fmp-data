@@ -4,6 +4,7 @@ from fmp_data.market.models import (
     CIKListEntry,
     CIKResult,
     CompanySearchResult,
+    CompanySymbolItem,
     CUSIPResult,
     ExchangeSymbol,
     IndustryPerformance,
@@ -14,9 +15,11 @@ from fmp_data.market.models import (
     MarketHoliday,
     MarketHours,
     MarketMover,
+    MarketStatus,
     PrePostMarketQuote,
     SectorPerformance,
     SectorPESnapshot,
+    SymbolChangeItem,
 )
 from fmp_data.market.schema import (
     AvailableIndexesArgs,
@@ -1067,4 +1070,43 @@ IPO_PROSPECTUS: Endpoint = Endpoint(
         "Find offering details for upcoming IPOs",
         "Get IPO pricing and proceeds information",
     ],
+)
+
+IS_MARKET_OPEN: Endpoint = Endpoint(
+    name="is_market_open",
+    path="is-the-market-open",
+    version=APIVersion.STABLE,
+    url_type=URLType.API,
+    method=HTTPMethod.GET,
+    description="Check if the stock market is currently open",
+    mandatory_params=[],
+    optional_params=[],
+    response_model=MarketStatus,
+    example_queries=["Is the market open?", "Check market status"],
+)
+
+SYMBOL_CHANGES_LIST: Endpoint = Endpoint(
+    name="symbol_changes_list",
+    path="symbol-changes-list",
+    version=APIVersion.STABLE,
+    url_type=URLType.API,
+    method=HTTPMethod.GET,
+    description="Get a list of all symbol changes",
+    mandatory_params=[],
+    optional_params=[],
+    response_model=SymbolChangeItem,
+    example_queries=["List symbol changes", "Show ticker changes"],
+)
+
+COMPANY_SYMBOLS_LIST: Endpoint = Endpoint(
+    name="company_symbols_list",
+    path="company-symbols-list",
+    version=APIVersion.STABLE,
+    url_type=URLType.API,
+    method=HTTPMethod.GET,
+    description="Get a comprehensive list of all company symbols",
+    mandatory_params=[],
+    optional_params=[],
+    response_model=CompanySymbolItem,
+    example_queries=["List all company symbols", "Get all tickers"],
 )
