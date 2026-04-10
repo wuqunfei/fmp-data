@@ -3,32 +3,44 @@
 from fmp_data.alternative.models import (
     Commodity,
     CommodityHistoricalPrice,
+    CommodityHistoricalPriceLight,
     CommodityIntradayPrice,
     CommodityQuote,
+    CommodityQuoteShort,
     CryptoHistoricalPrice,
+    CryptoHistoricalPriceLight,
     CryptoIntradayPrice,
     CryptoPair,
     CryptoQuote,
+    CryptoQuoteShort,
     ForexHistoricalPrice,
+    ForexHistoricalPriceLight,
     ForexIntradayPrice,
     ForexPair,
     ForexQuote,
+    ForexQuoteShort,
 )
 from fmp_data.alternative.schema import (
     CommoditiesListArgs,
     CommoditiesQuotesArgs,
     CommodityHistoricalArgs,
+    CommodityHistoricalLightArgs,
     CommodityIntradayArgs,
     CommodityQuoteArgs,
+    CommodityQuoteShortArgs,
     CryptoHistoricalArgs,
+    CryptoHistoricalLightArgs,
     CryptoIntradayArgs,
     CryptoListArgs,
     CryptoQuoteArgs,
+    CryptoQuoteShortArgs,
     CryptoQuotesArgs,
     ForexHistoricalArgs,
+    ForexHistoricalLightArgs,
     ForexIntradayArgs,
     ForexListArgs,
     ForexQuoteArgs,
+    ForexQuoteShortArgs,
     ForexQuotesArgs,
 )
 from fmp_data.models import (
@@ -206,6 +218,81 @@ CRYPTO_INTRADAY: Endpoint = Endpoint(
     ],
 )
 
+CRYPTO_QUOTE_SHORT: Endpoint = Endpoint(
+    name="crypto_quote_short",
+    path="cryptocurrency-quote-short",
+    version=APIVersion.STABLE,
+    url_type=URLType.API,
+    method=HTTPMethod.GET,
+    description=(
+        "Get a short real-time price quote for a specific cryptocurrency "
+        "with minimal fields including price and volume"
+    ),
+    mandatory_params=[
+        EndpointParam(
+            name="symbol",
+            location=ParamLocation.QUERY,
+            param_type=ParamType.STRING,
+            required=True,
+            description="Crypto pair symbol (e.g., BTCUSD)",
+        )
+    ],
+    optional_params=[],
+    response_model=CryptoQuoteShort,
+    arg_model=CryptoQuoteShortArgs,
+    example_queries=[
+        "Get short Bitcoin price quote",
+        "Quick crypto price for BTCUSD",
+        "Short quote for cryptocurrency",
+    ],
+)
+
+CRYPTO_HISTORICAL_LIGHT: Endpoint = Endpoint(
+    name="crypto_historical_light",
+    path="cryptocurrency-historical-price-eod-light",
+    version=APIVersion.STABLE,
+    url_type=URLType.API,
+    method=HTTPMethod.GET,
+    description=(
+        "Retrieve lightweight historical price data for a cryptocurrency "
+        "with only close price and volume"
+    ),
+    mandatory_params=[
+        EndpointParam(
+            name="symbol",
+            location=ParamLocation.QUERY,
+            param_type=ParamType.STRING,
+            required=True,
+            description="Crypto pair symbol",
+        )
+    ],
+    optional_params=[
+        EndpointParam(
+            name="start_date",
+            location=ParamLocation.QUERY,
+            param_type=ParamType.DATE,
+            required=False,
+            description="Start date",
+            alias="from",
+        ),
+        EndpointParam(
+            name="end_date",
+            location=ParamLocation.QUERY,
+            param_type=ParamType.DATE,
+            required=False,
+            description="End date",
+            alias="to",
+        ),
+    ],
+    response_model=CryptoHistoricalPriceLight,
+    arg_model=CryptoHistoricalLightArgs,
+    example_queries=[
+        "Get light Bitcoin historical prices",
+        "Lightweight crypto price history",
+        "Simple historical crypto data",
+    ],
+)
+
 FOREX_LIST: Endpoint = Endpoint(
     name="forex_list",
     path="forex-list",
@@ -363,6 +450,81 @@ FOREX_INTRADAY: Endpoint = Endpoint(
         "Show hourly forex rates",
         "Get intraday currency prices",
         "5-minute interval forex data",
+    ],
+)
+
+FOREX_QUOTE_SHORT: Endpoint = Endpoint(
+    name="forex_quote_short",
+    path="forex-quote-short",
+    version=APIVersion.STABLE,
+    url_type=URLType.API,
+    method=HTTPMethod.GET,
+    description=(
+        "Get a short real-time price quote for a specific forex pair "
+        "with minimal fields including price and volume"
+    ),
+    mandatory_params=[
+        EndpointParam(
+            name="symbol",
+            location=ParamLocation.QUERY,
+            param_type=ParamType.STRING,
+            required=True,
+            description="Forex pair symbol (e.g., EURUSD)",
+        )
+    ],
+    optional_params=[],
+    response_model=ForexQuoteShort,
+    arg_model=ForexQuoteShortArgs,
+    example_queries=[
+        "Get short EURUSD quote",
+        "Quick forex price",
+        "Short quote for currency pair",
+    ],
+)
+
+FOREX_HISTORICAL_LIGHT: Endpoint = Endpoint(
+    name="forex_historical_light",
+    path="forex-historical-price-eod-light",
+    version=APIVersion.STABLE,
+    url_type=URLType.API,
+    method=HTTPMethod.GET,
+    description=(
+        "Retrieve lightweight historical price data for a forex pair "
+        "with only close price and volume"
+    ),
+    mandatory_params=[
+        EndpointParam(
+            name="symbol",
+            location=ParamLocation.QUERY,
+            param_type=ParamType.STRING,
+            required=True,
+            description="Forex pair symbol",
+        )
+    ],
+    optional_params=[
+        EndpointParam(
+            name="start_date",
+            location=ParamLocation.QUERY,
+            param_type=ParamType.DATE,
+            required=False,
+            description="Start date",
+            alias="from",
+        ),
+        EndpointParam(
+            name="end_date",
+            location=ParamLocation.QUERY,
+            param_type=ParamType.DATE,
+            required=False,
+            description="End date",
+            alias="to",
+        ),
+    ],
+    response_model=ForexHistoricalPriceLight,
+    arg_model=ForexHistoricalLightArgs,
+    example_queries=[
+        "Get light forex historical prices",
+        "Lightweight forex price history",
+        "Simple historical forex data",
     ],
 )
 
@@ -531,5 +693,80 @@ COMMODITY_INTRADAY: Endpoint = Endpoint(
         "5-minute interval silver prices",
         "Get high-frequency commodity data",
         "Real-time commodity price updates",
+    ],
+)
+
+COMMODITY_QUOTE_SHORT: Endpoint = Endpoint(
+    name="commodity_quote_short",
+    path="commodities-quote-short",
+    version=APIVersion.STABLE,
+    url_type=URLType.API,
+    method=HTTPMethod.GET,
+    description=(
+        "Get a short real-time price quote for a specific commodity "
+        "with minimal fields including price and volume"
+    ),
+    mandatory_params=[
+        EndpointParam(
+            name="symbol",
+            location=ParamLocation.QUERY,
+            param_type=ParamType.STRING,
+            required=True,
+            description="Commodity symbol (e.g., ZOUSX)",
+        )
+    ],
+    optional_params=[],
+    response_model=CommodityQuoteShort,
+    arg_model=CommodityQuoteShortArgs,
+    example_queries=[
+        "Get short gold price quote",
+        "Quick commodity price",
+        "Short quote for commodity",
+    ],
+)
+
+COMMODITY_HISTORICAL_LIGHT: Endpoint = Endpoint(
+    name="commodity_historical_light",
+    path="commodities-historical-price-eod-light",
+    version=APIVersion.STABLE,
+    url_type=URLType.API,
+    method=HTTPMethod.GET,
+    description=(
+        "Retrieve lightweight historical price data for a commodity "
+        "with only close price and volume"
+    ),
+    mandatory_params=[
+        EndpointParam(
+            name="symbol",
+            location=ParamLocation.QUERY,
+            param_type=ParamType.STRING,
+            required=True,
+            description="Commodity symbol (e.g., ZOUSX)",
+        )
+    ],
+    optional_params=[
+        EndpointParam(
+            name="start_date",
+            location=ParamLocation.QUERY,
+            param_type=ParamType.DATE,
+            required=False,
+            description="Start date for historical data",
+            alias="from",
+        ),
+        EndpointParam(
+            name="end_date",
+            location=ParamLocation.QUERY,
+            param_type=ParamType.DATE,
+            required=False,
+            description="End date for historical data",
+            alias="to",
+        ),
+    ],
+    response_model=CommodityHistoricalPriceLight,
+    arg_model=CommodityHistoricalLightArgs,
+    example_queries=[
+        "Get light commodity historical prices",
+        "Lightweight commodity price history",
+        "Simple historical commodity data",
     ],
 )

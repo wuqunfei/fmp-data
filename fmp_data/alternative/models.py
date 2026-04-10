@@ -237,6 +237,26 @@ class CryptoIntradayPrice(IntradayPrice):
     pass
 
 
+class CryptoQuoteShort(BaseModel):
+    """Short cryptocurrency quote"""
+
+    model_config = default_model_config
+
+    symbol: str = Field(description="Crypto symbol")
+    price: float | None = Field(None, description="Current price")
+    volume: int | None = Field(None, description="Trading volume")
+
+
+class CryptoHistoricalPriceLight(BaseModel):
+    """Light cryptocurrency historical price data"""
+
+    model_config = default_model_config
+
+    date: datetime = Field(description="Price date")
+    close: float | None = Field(None, description="Closing price")
+    volume: int | None = Field(None, description="Trading volume")
+
+
 # Forex Models
 class ForexPair(BaseModel):
     """Forex trading pair information"""
@@ -310,6 +330,26 @@ class ForexIntradayPrice(IntradayPrice):
     pass
 
 
+class ForexQuoteShort(BaseModel):
+    """Short forex quote"""
+
+    model_config = default_model_config
+
+    symbol: str = Field(description="Forex pair symbol")
+    price: float | None = Field(None, description="Current price")
+    volume: int | None = Field(None, description="Trading volume")
+
+
+class ForexHistoricalPriceLight(BaseModel):
+    """Light forex historical price data"""
+
+    model_config = default_model_config
+
+    date: datetime = Field(description="Price date")
+    close: float | None = Field(None, description="Closing price")
+    volume: int | None = Field(None, description="Trading volume")
+
+
 # Commodities Models
 class Commodity(BaseModel):
     """Commodity information"""
@@ -370,3 +410,23 @@ class CommodityIntradayPrice(IntradayPrice):
     """Commodity intraday price"""
 
     pass
+
+
+class CommodityQuoteShort(BaseModel):
+    """Short commodity quote"""
+
+    model_config = default_model_config
+
+    symbol: str = Field(description="Commodity symbol")
+    price: float | None = Field(None, description="Current price")
+    volume: int | None = Field(None, description="Trading volume")
+
+
+class CommodityHistoricalPriceLight(BaseModel):
+    """Light commodity historical price data"""
+
+    model_config = default_model_config
+
+    date: datetime = Field(description="Price date")
+    close: float | None = Field(None, description="Closing price")
+    volume: int | None = Field(None, description="Trading volume")

@@ -10,32 +10,44 @@ from fmp_data.alternative.endpoints import (
     COMMODITIES_LIST,
     COMMODITIES_QUOTES,
     COMMODITY_HISTORICAL,
+    COMMODITY_HISTORICAL_LIGHT,
     COMMODITY_INTRADAY,
     COMMODITY_QUOTE,
+    COMMODITY_QUOTE_SHORT,
     CRYPTO_HISTORICAL,
+    CRYPTO_HISTORICAL_LIGHT,
     CRYPTO_INTRADAY,
     CRYPTO_LIST,
     CRYPTO_QUOTE,
+    CRYPTO_QUOTE_SHORT,
     CRYPTO_QUOTES,
     FOREX_HISTORICAL,
+    FOREX_HISTORICAL_LIGHT,
     FOREX_INTRADAY,
     FOREX_LIST,
     FOREX_QUOTE,
+    FOREX_QUOTE_SHORT,
     FOREX_QUOTES,
 )
 from fmp_data.alternative.models import (
     Commodity,
+    CommodityHistoricalPriceLight,
     CommodityIntradayPrice,
     CommodityPriceHistory,
     CommodityQuote,
+    CommodityQuoteShort,
     CryptoHistoricalData,
+    CryptoHistoricalPriceLight,
     CryptoIntradayPrice,
     CryptoPair,
     CryptoQuote,
+    CryptoQuoteShort,
+    ForexHistoricalPriceLight,
     ForexIntradayPrice,
     ForexPair,
     ForexPriceHistory,
     ForexQuote,
+    ForexQuoteShort,
 )
 from fmp_data.base import AsyncEndpointGroup
 
@@ -89,6 +101,25 @@ class AsyncAlternativeMarketsClient(AsyncEndpointGroup):
             CRYPTO_INTRADAY, symbol=symbol, interval=interval
         )
 
+    async def get_crypto_quote_short(self, symbol: str) -> CryptoQuoteShort:
+        """Get short cryptocurrency quote"""
+        result = await self.client.request_async(CRYPTO_QUOTE_SHORT, symbol=symbol)
+        return self._unwrap_single(result, CryptoQuoteShort)
+
+    async def get_crypto_historical_light(
+        self,
+        symbol: str,
+        start_date: date | None = None,
+        end_date: date | None = None,
+    ) -> list[CryptoHistoricalPriceLight]:
+        """Get light cryptocurrency historical prices"""
+        params: dict[str, str] = {"symbol": symbol}
+        if start_date:
+            params["start_date"] = start_date.strftime("%Y-%m-%d")
+        if end_date:
+            params["end_date"] = end_date.strftime("%Y-%m-%d")
+        return await self.client.request_async(CRYPTO_HISTORICAL_LIGHT, **params)
+
     # Forex methods
     async def get_forex_list(self) -> list[ForexPair]:
         """Get list of available forex pairs"""
@@ -127,6 +158,25 @@ class AsyncAlternativeMarketsClient(AsyncEndpointGroup):
             FOREX_INTRADAY, symbol=symbol, interval=interval
         )
 
+    async def get_forex_quote_short(self, symbol: str) -> ForexQuoteShort:
+        """Get short forex quote"""
+        result = await self.client.request_async(FOREX_QUOTE_SHORT, symbol=symbol)
+        return self._unwrap_single(result, ForexQuoteShort)
+
+    async def get_forex_historical_light(
+        self,
+        symbol: str,
+        start_date: date | None = None,
+        end_date: date | None = None,
+    ) -> list[ForexHistoricalPriceLight]:
+        """Get light forex historical prices"""
+        params: dict[str, str] = {"symbol": symbol}
+        if start_date:
+            params["start_date"] = start_date.strftime("%Y-%m-%d")
+        if end_date:
+            params["end_date"] = end_date.strftime("%Y-%m-%d")
+        return await self.client.request_async(FOREX_HISTORICAL_LIGHT, **params)
+
     # Commodities methods
     async def get_commodities_list(self) -> list[Commodity]:
         """Get list of available commodities"""
@@ -164,3 +214,22 @@ class AsyncAlternativeMarketsClient(AsyncEndpointGroup):
         return await self.client.request_async(
             COMMODITY_INTRADAY, symbol=symbol, interval=interval
         )
+
+    async def get_commodity_quote_short(self, symbol: str) -> CommodityQuoteShort:
+        """Get short commodity quote"""
+        result = await self.client.request_async(COMMODITY_QUOTE_SHORT, symbol=symbol)
+        return self._unwrap_single(result, CommodityQuoteShort)
+
+    async def get_commodity_historical_light(
+        self,
+        symbol: str,
+        start_date: date | None = None,
+        end_date: date | None = None,
+    ) -> list[CommodityHistoricalPriceLight]:
+        """Get light commodity historical prices"""
+        params: dict[str, str] = {"symbol": symbol}
+        if start_date:
+            params["start_date"] = start_date.strftime("%Y-%m-%d")
+        if end_date:
+            params["end_date"] = end_date.strftime("%Y-%m-%d")
+        return await self.client.request_async(COMMODITY_HISTORICAL_LIGHT, **params)

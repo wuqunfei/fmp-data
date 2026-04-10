@@ -5,17 +5,23 @@ from fmp_data.alternative.endpoints import (
     COMMODITIES_LIST,
     COMMODITIES_QUOTES,
     COMMODITY_HISTORICAL,
+    COMMODITY_HISTORICAL_LIGHT,
     COMMODITY_INTRADAY,
     COMMODITY_QUOTE,
+    COMMODITY_QUOTE_SHORT,
     CRYPTO_HISTORICAL,
+    CRYPTO_HISTORICAL_LIGHT,
     CRYPTO_INTRADAY,
     CRYPTO_LIST,
     CRYPTO_QUOTE,
+    CRYPTO_QUOTE_SHORT,
     CRYPTO_QUOTES,
     FOREX_HISTORICAL,
+    FOREX_HISTORICAL_LIGHT,
     FOREX_INTRADAY,
     FOREX_LIST,
     FOREX_QUOTE,
+    FOREX_QUOTE_SHORT,
     FOREX_QUOTES,
 )
 from fmp_data.lc.models import (
@@ -34,16 +40,22 @@ ALTERNATIVE_ENDPOINT_MAP = {
         "crypto_quote": CRYPTO_QUOTE,
         "crypto_historical": CRYPTO_HISTORICAL,
         "crypto_intraday": CRYPTO_INTRADAY,
+        "crypto_quote_short": CRYPTO_QUOTE_SHORT,
+        "crypto_historical_light": CRYPTO_HISTORICAL_LIGHT,
         "forex_list": FOREX_LIST,
         "forex_quotes": FOREX_QUOTES,
         "forex_quote": FOREX_QUOTE,
         "forex_historical": FOREX_HISTORICAL,
         "forex_intraday": FOREX_INTRADAY,
+        "forex_quote_short": FOREX_QUOTE_SHORT,
+        "forex_historical_light": FOREX_HISTORICAL_LIGHT,
         "commodities_list": COMMODITIES_LIST,
         "commodities_quotes": COMMODITIES_QUOTES,
         "commodity_quote": COMMODITY_QUOTE,
         "commodity_historical": COMMODITY_HISTORICAL,
         "commodity_intraday": COMMODITY_INTRADAY,
+        "commodity_quote_short": COMMODITY_QUOTE_SHORT,
+        "commodity_historical_light": COMMODITY_HISTORICAL_LIGHT,
     }.items()
 }
 
@@ -324,6 +336,79 @@ ALTERNATIVE_ENDPOINTS_SEMANTICS = {
             "Technical analysis",
         ],
     ),
+    "crypto_quote_short": EndpointSemantics(
+        client_name="alternative",
+        method_name="get_crypto_quote_short",
+        natural_description=(
+            "Get a short real-time price quote for a specific cryptocurrency"
+        ),
+        example_queries=[
+            "Get short Bitcoin price quote",
+            "Quick crypto price for BTCUSD",
+            "Short quote for cryptocurrency",
+        ],
+        related_terms=[
+            "crypto price",
+            "short quote",
+            "quick price",
+            "cryptocurrency",
+        ],
+        category=SemanticCategory.ALTERNATIVE_DATA,
+        sub_category="Cryptocurrency",
+        parameter_hints={"symbol": SYMBOL_HINTS["crypto"]},
+        response_hints={
+            "price": ResponseFieldInfo(
+                description="Current trading price",
+                examples=["45000.50", "1800.75"],
+                related_terms=["price", "current price"],
+            ),
+        },
+        use_cases=[
+            "Quick crypto price check",
+            "Lightweight price monitoring",
+        ],
+    ),
+    "crypto_historical_light": EndpointSemantics(
+        client_name="alternative",
+        method_name="get_crypto_historical_light",
+        natural_description=(
+            "Get lightweight historical price data for a cryptocurrency"
+        ),
+        example_queries=[
+            "Get light Bitcoin historical prices",
+            "Lightweight crypto price history",
+            "Simple historical crypto data",
+        ],
+        related_terms=[
+            "historical prices",
+            "light history",
+            "price history",
+            "crypto history",
+        ],
+        category=SemanticCategory.ALTERNATIVE_DATA,
+        sub_category="Cryptocurrency",
+        parameter_hints={
+            "symbol": SYMBOL_HINTS["crypto"],
+            "start_date": DATE_HINTS["start_date"],
+            "end_date": DATE_HINTS["end_date"],
+        },
+        response_hints={
+            "date": ResponseFieldInfo(
+                description="Trading date",
+                examples=["2023-12-20"],
+                related_terms=["date", "trading date"],
+            ),
+            "close": ResponseFieldInfo(
+                description="Closing price",
+                examples=["45000.50"],
+                related_terms=["close", "closing price"],
+            ),
+        },
+        use_cases=[
+            "Lightweight historical analysis",
+            "Simple price trend review",
+        ],
+    ),
     # Forex endpoints
     "forex_list": EndpointSemantics(
         client_name="alternative",
@@ -532,6 +617,79 @@ ALTERNATIVE_ENDPOINTS_SEMANTICS = {
             "Short-term trading",
         ],
     ),
+    "forex_quote_short": EndpointSemantics(
+        client_name="alternative",
+        method_name="get_forex_quote_short",
+        natural_description=(
+            "Get a short real-time price quote for a specific forex pair"
+        ),
+        example_queries=[
+            "Get short EURUSD quote",
+            "Quick forex price",
+            "Short quote for currency pair",
+        ],
+        related_terms=[
+            "forex price",
+            "short quote",
+            "quick rate",
+            "currency pair",
+        ],
+        category=SemanticCategory.ALTERNATIVE_DATA,
+        sub_category="Forex",
+        parameter_hints={"symbol": SYMBOL_HINTS["forex"]},
+        response_hints={
+            "price": ResponseFieldInfo(
+                description="Current exchange rate",
+                examples=["1.2150", "110.75"],
+                related_terms=["rate", "exchange rate"],
+            ),
+        },
+        use_cases=[
+            "Quick forex rate check",
+            "Lightweight rate monitoring",
+        ],
+    ),
+    "forex_historical_light": EndpointSemantics(
+        client_name="alternative",
+        method_name="get_forex_historical_light",
+        natural_description=(
+            "Get lightweight historical price data for a forex pair"
+        ),
+        example_queries=[
+            "Get light forex historical prices",
+            "Lightweight forex price history",
+            "Simple historical forex data",
+        ],
+        related_terms=[
+            "historical rates",
+            "light history",
+            "rate history",
+            "forex history",
+        ],
+        category=SemanticCategory.ALTERNATIVE_DATA,
+        sub_category="Forex",
+        parameter_hints={
+            "symbol": SYMBOL_HINTS["forex"],
+            "start_date": DATE_HINTS["start_date"],
+            "end_date": DATE_HINTS["end_date"],
+        },
+        response_hints={
+            "date": ResponseFieldInfo(
+                description="Trading date",
+                examples=["2023-12-20"],
+                related_terms=["date", "trading date"],
+            ),
+            "close": ResponseFieldInfo(
+                description="Closing rate",
+                examples=["1.2150"],
+                related_terms=["close", "closing rate"],
+            ),
+        },
+        use_cases=[
+            "Lightweight historical analysis",
+            "Simple rate trend review",
+        ],
+    ),
     # Commodities endpoints
     "commodities_list": EndpointSemantics(
         client_name="alternative",
@@ -731,6 +889,79 @@ ALTERNATIVE_ENDPOINTS_SEMANTICS = {
             "Market monitoring",
             "Technical analysis",
             "Price tracking",
+        ],
+    ),
+    "commodity_quote_short": EndpointSemantics(
+        client_name="alternative",
+        method_name="get_commodity_quote_short",
+        natural_description=(
+            "Get a short real-time price quote for a specific commodity"
+        ),
+        example_queries=[
+            "Get short gold price quote",
+            "Quick commodity price",
+            "Short quote for commodity",
+        ],
+        related_terms=[
+            "commodity price",
+            "short quote",
+            "quick price",
+            "spot price",
+        ],
+        category=SemanticCategory.ALTERNATIVE_DATA,
+        sub_category="Commodities",
+        parameter_hints={"symbol": SYMBOL_HINTS["commodity"]},
+        response_hints={
+            "price": ResponseFieldInfo(
+                description="Current price",
+                examples=["1875.50", "75.30"],
+                related_terms=["spot price", "market price"],
+            ),
+        },
+        use_cases=[
+            "Quick commodity price check",
+            "Lightweight price monitoring",
+        ],
+    ),
+    "commodity_historical_light": EndpointSemantics(
+        client_name="alternative",
+        method_name="get_commodity_historical_light",
+        natural_description=(
+            "Get lightweight historical price data for a commodity"
+        ),
+        example_queries=[
+            "Get light commodity historical prices",
+            "Lightweight commodity price history",
+            "Simple historical commodity data",
+        ],
+        related_terms=[
+            "historical prices",
+            "light history",
+            "price history",
+            "commodity history",
+        ],
+        category=SemanticCategory.ALTERNATIVE_DATA,
+        sub_category="Commodities",
+        parameter_hints={
+            "symbol": SYMBOL_HINTS["commodity"],
+            "start_date": DATE_HINTS["start_date"],
+            "end_date": DATE_HINTS["end_date"],
+        },
+        response_hints={
+            "date": ResponseFieldInfo(
+                description="Trading date",
+                examples=["2023-12-20"],
+                related_terms=["date", "trading date"],
+            ),
+            "close": ResponseFieldInfo(
+                description="Closing price",
+                examples=["1875.50"],
+                related_terms=["close", "closing price"],
+            ),
+        },
+        use_cases=[
+            "Lightweight historical analysis",
+            "Simple price trend review",
         ],
     ),
 }

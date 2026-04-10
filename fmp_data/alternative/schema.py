@@ -89,6 +89,24 @@ class CryptoIntradayArgs(BaseIntradayArgs):
     )
 
 
+class CryptoQuoteShortArgs(BaseQuoteArgs):
+    """Arguments for getting a short cryptocurrency quote"""
+
+    symbol: str = Field(
+        description="Crypto symbol (e.g., 'BTCUSD')",
+        pattern=r"^[A-Z]{3,4}USD$",
+    )
+
+
+class CryptoHistoricalLightArgs(BaseHistoricalArgs):
+    """Arguments for getting light cryptocurrency historical prices"""
+
+    symbol: str = Field(
+        description="Crypto symbol (e.g., 'BTCUSD')",
+        pattern=r"^[A-Z]{3,4}USD$",
+    )
+
+
 # Forex Arguments
 class ForexListArgs(BaseListArgs):
     """Arguments for listing available forex pairs"""
@@ -127,6 +145,24 @@ class ForexIntradayArgs(BaseIntradayArgs):
     )
 
 
+class ForexQuoteShortArgs(BaseQuoteArgs):
+    """Arguments for getting a short forex quote"""
+
+    symbol: str = Field(
+        description="Forex pair (e.g., 'EURUSD')",
+        pattern=r"^[A-Z]{6}$",
+    )
+
+
+class ForexHistoricalLightArgs(BaseHistoricalArgs):
+    """Arguments for getting light forex historical prices"""
+
+    symbol: str = Field(
+        description="Forex pair (e.g., 'EURUSD')",
+        pattern=r"^[A-Z]{6}$",
+    )
+
+
 # Commodity Arguments
 class CommoditiesListArgs(BaseListArgs):
     """Arguments for listing available commodities"""
@@ -162,4 +198,22 @@ class CommodityIntradayArgs(BaseIntradayArgs):
 
     symbol: str = Field(
         description="Trading symbol for the commodity", pattern=r"^[A-Z]{2,3}$"
+    )
+
+
+class CommodityQuoteShortArgs(BaseQuoteArgs):
+    """Arguments for getting a short commodity quote"""
+
+    symbol: str = Field(
+        description="Commodity (e.g., 'ZOUSX')",
+        pattern=r"^[A-Z]{2,5}$",
+    )
+
+
+class CommodityHistoricalLightArgs(BaseHistoricalArgs):
+    """Arguments for getting light commodity historical prices"""
+
+    symbol: str = Field(
+        description="Commodity (e.g., 'ZOUSX')",
+        pattern=r"^[A-Z]{2,5}$",
     )
