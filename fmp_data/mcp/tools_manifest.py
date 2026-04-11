@@ -10,22 +10,36 @@ FMP_MCP_MANIFEST environment variable to point to a custom manifest file.
 """
 
 DEFAULT_TOOLS: list[str] = [
-    # Alternative (15 tools) - Crypto, Forex, and Commodities
+    # Alternative (21 tools) - Crypto, Forex, and Commodities
     "alternative.commodities_list",
     "alternative.commodities_quotes",
     "alternative.commodity_historical",
+    "alternative.commodity_historical_light",
     "alternative.commodity_intraday",
     "alternative.commodity_quote",
+    "alternative.commodity_quote_short",
     "alternative.crypto_historical",
+    "alternative.crypto_historical_light",
     "alternative.crypto_intraday",
     "alternative.crypto_list",
     "alternative.crypto_quote",
+    "alternative.crypto_quote_short",
     "alternative.crypto_quotes",
     "alternative.forex_historical",
+    "alternative.forex_historical_light",
     "alternative.forex_intraday",
     "alternative.forex_list",
     "alternative.forex_quote",
+    "alternative.forex_quote_short",
     "alternative.forex_quotes",
+    # Batch (7 tools) - Bulk Quote Data
+    "batch.full_exchange_quotes",
+    "batch.full_etf_quotes",
+    "batch.full_mutualfund_quotes",
+    "batch.full_crypto_quotes",
+    "batch.full_commodities_quotes",
+    "batch.full_forex_quotes",
+    "batch.full_index_quotes",
     # Company (31 tools) - Company Information and Quotes
     "company.analyst_estimates",
     "company.analyst_recommendations",
@@ -140,10 +154,21 @@ DEFAULT_TOOLS: list[str] = [
     "investment.mutual_fund_dates",
     "investment.mutual_fund_holder",
     "investment.mutual_fund_holdings",
-    # Market (14 tools) - Market Data and Search
+    # Index (9 tools) - Market Index Data
+    "index.indexes_list",
+    "index.index_quote",
+    "index.index_quote_short",
+    "index.all_index_quotes",
+    "index.index_historical_eod_full",
+    "index.index_historical_eod_light",
+    "index.index_intraday_1min",
+    "index.index_intraday_5min",
+    "index.index_intraday_1hour",
+    # Market (17 tools) - Market Data and Search
     "market.all_shares_float",
     "market.all_exchange_market_hours",
     "market.available_indexes",
+    "market.company_symbols_list",
     "market.etf_list",
     "market.gainers",
     "market.historical_industry_pe",
@@ -152,6 +177,7 @@ DEFAULT_TOOLS: list[str] = [
     "market.historical_sector_performance",
     "market.industry_pe_snapshot",
     "market.industry_performance_snapshot",
+    "market.is_market_open",
     "market.holidays_by_exchange",
     "market.losers",
     "market.market_hours",
@@ -163,6 +189,7 @@ DEFAULT_TOOLS: list[str] = [
     "market.sector_pe_snapshot",
     "market.sector_performance",
     "market.stock_list",
+    "market.symbol_changes_list",
     # Technical (9 tools) - Technical Indicators
     "technical.adx",
     "technical.dema",
