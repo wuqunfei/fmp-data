@@ -1,24 +1,24 @@
 # FMP API Endpoints (Stable)
 
-This document reflects 100% coverage of the FMP stable endpoint catalog as implemented in `fmp-data`.
+This document reflects 100% coverage of the FMP stable endpoint catalog as implemented in `fmp-data` (317 endpoints).
 
 All endpoints use the `/stable` prefix unless explicitly marked as `DIRECT` or `IMAGE`.
 
 ## Table of Contents
 
 - [Company (58 endpoints)](#company)
-- [Market (36 endpoints)](#market)
+- [Market (39 endpoints)](#market)
 - [Fundamental (14 endpoints)](#fundamental)
 - [Technical (9 endpoints)](#technical)
 - [Market Intelligence (47 endpoints)](#market-intelligence)
 - [Institutional (25 endpoints)](#institutional)
 - [Investment (14 endpoints)](#investment)
-- [Alternative Markets (15 endpoints)](#alternative-markets)
+- [Alternative Markets (21 endpoints)](#alternative-markets)
 - [Economics (7 endpoints)](#economics)
-- [Batch (30 endpoints)](#batch)
+- [Batch (37 endpoints)](#batch)
 - [Transcripts (4 endpoints)](#transcripts)
 - [SEC (12 endpoints)](#sec)
-- [Index (6 endpoints)](#index)
+- [Index (15 endpoints)](#index)
 
 ## Company
 
@@ -87,7 +87,7 @@ All endpoints use the `/stable` prefix unless explicitly marked as `DIRECT` or `
 
 ## Market
 
-### 36 endpoints
+### 39 endpoints
 
 | Endpoint | Path | Description |
 |----------|------|-------------|
@@ -127,6 +127,9 @@ All endpoints use the `/stable` prefix unless explicitly marked as `DIRECT` or `
 | `all_shares_float` | `/stable/shares-float-all` | Get share float data for all companies at once. Provides a comprehensive view of market-wide float data, useful for screening and comparing companies based on their float characteristics. |
 | `stock_list` | `/stable/stock-list` | Get a comprehensive list of all available stocks with their basic information including symbol, name, price, and exchange details. Returns the complete universe of tradable stocks. |
 | `tradable_search` | `/stable/tradable-list` | Get list of tradable securities |
+| `is_the_market_open` | `/stable/is-the-market-open` | Check if the stock market is currently open |
+| `symbol_changes_list` | `/stable/symbol-changes-list` | Get a list of all symbol changes |
+| `company_symbols_list` | `/stable/company-symbols-list` | Get a comprehensive list of all company symbols |
 
 ## Fundamental
 
@@ -273,7 +276,7 @@ All endpoints use the `/stable` prefix unless explicitly marked as `DIRECT` or `
 
 ## Alternative Markets
 
-### 15 endpoints
+### 21 endpoints
 
 | Endpoint | Path | Description |
 |----------|------|-------------|
@@ -292,6 +295,12 @@ All endpoints use the `/stable` prefix unless explicitly marked as `DIRECT` or `
 | `commodities_quotes` | `/stable/quotes/commodity` | Retrieve real-time quotes for all available commodities including current prices, daily changes, and trading volumes |
 | `crypto_quotes` | `/stable/quotes/crypto` | Retrieve real-time price quotes for all available cryptocurrencies including current price, daily change, volume and other key metrics |
 | `forex_quotes` | `/stable/quotes/forex` | Retrieve real-time quotes for all available forex currency pairs including current exchange rates and daily changes |
+| `cryptocurrency_quote_short` | `/stable/cryptocurrency-quote-short` | Get a short quote for a cryptocurrency |
+| `cryptocurrency_historical_price_eod_light` | `/stable/cryptocurrency-historical-price-eod/light` | Get light historical end-of-day prices for a cryptocurrency |
+| `forex_quote_short` | `/stable/forex-quote-short` | Get a short quote for a forex pair |
+| `forex_historical_price_eod_light` | `/stable/forex-historical-price-eod/light` | Get light historical end-of-day prices for a forex pair |
+| `commodities_quote_short` | `/stable/commodities-quote-short` | Get a short quote for a commodity |
+| `commodities_historical_price_eod_light` | `/stable/commodities-historical-price-eod/light` | Get light historical end-of-day prices for a commodity |
 
 ## Economics
 
@@ -309,7 +318,7 @@ All endpoints use the `/stable` prefix unless explicitly marked as `DIRECT` or `
 
 ## Batch
 
-### 30 endpoints
+### 37 endpoints
 
 | Endpoint | Path | Description |
 |----------|------|-------------|
@@ -343,6 +352,13 @@ All endpoints use the `/stable` prefix unless explicitly marked as `DIRECT` or `
 | `ratios_ttm_bulk` | `/stable/ratios-ttm-bulk` | Get trailing twelve month financial ratios in bulk |
 | `scores_bulk` | `/stable/scores-bulk` | Get financial scores in bulk |
 | `upgrades_downgrades_consensus_bulk` | `/stable/upgrades-downgrades-consensus-bulk` | Get upgrades/downgrades consensus data in bulk |
+| `full_exchange_quotes` | `/stable/full-exchange-quotes` | Get full quotes for all stocks on an exchange |
+| `full_etf_quotes` | `/stable/full-etf-quotes` | Get full quotes for all ETFs |
+| `full_mutualfund_quotes` | `/stable/full-mutualfund-quotes` | Get full quotes for all mutual funds |
+| `full_cryptocurrency_quotes` | `/stable/full-cryptocurrency-quotes` | Get full quotes for all cryptocurrencies |
+| `full_commodities_quotes` | `/stable/full-commodities-quotes` | Get full quotes for all commodities |
+| `full_forex_quotes` | `/stable/full-forex-quotes` | Get full quotes for all forex pairs |
+| `full_index_quotes` | `/stable/full-index-quotes` | Get full quotes for all stock market indexes |
 
 ## Transcripts
 
@@ -376,7 +392,7 @@ All endpoints use the `/stable` prefix unless explicitly marked as `DIRECT` or `
 
 ## Index
 
-### 6 endpoints
+### 15 endpoints
 
 | Endpoint | Path | Description |
 |----------|------|-------------|
@@ -386,3 +402,12 @@ All endpoints use the `/stable` prefix unless explicitly marked as `DIRECT` or `
 | `historical_sp500` | `/stable/historical-sp500-constituent` | Get historical S&P 500 constituent changes |
 | `nasdaq_constituents` | `/stable/nasdaq-constituent` | Get current NASDAQ index constituents |
 | `sp500_constituents` | `/stable/sp500-constituent` | Get current S&P 500 index constituents |
+| `indexes_list` | `/stable/indexes-list` | Get a list of all available stock market indexes |
+| `index_quote` | `/stable/index-quote` | Get real-time quote for a stock market index |
+| `index_quote_short` | `/stable/index-quote-short` | Get a short quote for a stock market index |
+| `all_index_quotes` | `/stable/all-index-quotes` | Get real-time quotes for all stock market indexes |
+| `index_historical_price_eod_full` | `/stable/index-historical-price-eod/full` | Get full historical end-of-day prices for an index |
+| `index_historical_price_eod_light` | `/stable/index-historical-price-eod/light` | Get light historical end-of-day prices for an index |
+| `index_intraday_1_min` | `/stable/index-intraday/1min` | Get 1-minute interval intraday prices for an index |
+| `index_intraday_5_min` | `/stable/index-intraday/5min` | Get 5-minute interval intraday prices for an index |
+| `index_intraday_1_hour` | `/stable/index-intraday/1hour` | Get 1-hour interval intraday prices for an index |

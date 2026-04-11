@@ -7,19 +7,21 @@ For full FMP endpoint coverage, use the Python client. The MCP tool catalog incl
 
 ## Table of Contents
 
-- [Alternative (15 tools)](#alternative)
+- [Alternative (21 tools)](#alternative)
+- [Batch (7 tools)](#batch)
 - [Company (31 tools)](#company)
 - [Economics (7 tools)](#economics)
 - [Fundamental (14 tools)](#fundamental)
+- [Index (9 tools)](#index)
 - [Institutional (13 tools)](#institutional)
 - [Intelligence (39 tools)](#intelligence)
 - [Investment (14 tools)](#investment)
-- [Market (23 tools)](#market)
+- [Market (26 tools)](#market)
 - [Technical (9 tools)](#technical)
 
 ## Alternative
 
-**15 tools** for alternative data access.
+**21 tools** for alternative data access.
 
 | Tool Key | Description |
 |----------|-------------|
@@ -38,6 +40,26 @@ For full FMP endpoint coverage, use the Python client. The MCP tool catalog incl
 | `forex_list` | Get a complete list of available forex currency pairs |
 | `forex_quote` | Get detailed real-time quote for a specific currency pair |
 | `forex_quotes` | Get real-time quotes for all available forex currency pairs |
+| `crypto_quote_short` | Get short crypto quote |
+| `crypto_historical_light` | Get light historical crypto prices |
+| `forex_quote_short` | Get short forex quote |
+| `forex_historical_light` | Get light historical forex prices |
+| `commodity_quote_short` | Get short commodity quote |
+| `commodity_historical_light` | Get light historical commodity prices |
+
+## Batch
+
+**7 tools** for bulk quote retrieval.
+
+| Tool Key | Description |
+|----------|-------------|
+| `full_exchange_quotes` | Get full quotes for an exchange |
+| `full_etf_quotes` | Get full ETF quotes |
+| `full_mutualfund_quotes` | Get full mutual fund quotes |
+| `full_crypto_quotes` | Get full crypto quotes |
+| `full_commodities_quotes` | Get full commodity quotes |
+| `full_forex_quotes` | Get full forex quotes |
+| `full_index_quotes` | Get full index quotes |
 
 ## Company
 
@@ -111,6 +133,22 @@ For full FMP endpoint coverage, use the Python client. The MCP tool catalog incl
 | `latest_financial_statements` | Get the latest financial statement publication metadata across symbols with pagination. |
 | `levered_dcf` | Perform levered discounted cash flow valuation with detailed assumptions about growth, cost of capital, and future cash flows. |
 | `owner_earnings` | Calculate owner earnings using Warren Buffett's methodology to evaluate true business profitability and cash generation capability. |
+
+## Index
+
+**9 tools** for stock market index data.
+
+| Tool Key | Description |
+|----------|-------------|
+| `indexes_list` | List all available stock market indexes |
+| `index_quote` | Get real-time index quote |
+| `index_quote_short` | Get short index quote |
+| `all_index_quotes` | Get all index quotes |
+| `index_historical_eod_full` | Get full historical index prices |
+| `index_historical_eod_light` | Get light historical index prices |
+| `index_intraday_1min` | Get 1-minute index intraday data |
+| `index_intraday_5min` | Get 5-minute index intraday data |
+| `index_intraday_1hour` | Get 1-hour index intraday data |
 
 ## Institutional
 
@@ -198,7 +236,7 @@ For full FMP endpoint coverage, use the Python client. The MCP tool catalog incl
 
 ## Market
 
-**23 tools** for market data and search.
+**26 tools** for market data and search.
 
 | Tool Key | Description |
 |----------|-------------|
@@ -225,6 +263,9 @@ For full FMP endpoint coverage, use the Python client. The MCP tool catalog incl
 | `sector_pe_snapshot` | Get sector price-to-earnings snapshots for a specific date, optionally filtered by exchange or sector |
 | `sector_performance` | Get performance data for major market sectors, showing relative strength and weakness across different areas of the market |
 | `stock_list` | Get a complete list of all available stocks in the market including their basic information such as symbol, name, and exchange listing |
+| `is_market_open` | Check if market is open |
+| `symbol_changes_list` | List all symbol changes |
+| `company_symbols_list` | List all company symbols |
 
 ## Technical
 
